@@ -1,0 +1,29 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--mat-sys-surface-dim);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.error-msg {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}

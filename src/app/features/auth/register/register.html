@@ -1,0 +1,45 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Crear cuenta</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (error) {
+        <mat-error class="error-msg">{{ error }}</mat-error>
+      }
+      <form #regForm="ngForm" (submit)="register()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput [(ngModel)]="username" name="username" required>
+          <mat-icon matIconPrefix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required>
+          <mat-icon matIconPrefix>email</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+          <button mat-icon-button matIconSuffix (click)="hide.set(!hide())" type="button">
+            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirmar contraseña</mat-label>
+          <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        </mat-form-field>
+        <div class="checkbox-group">
+          <mat-checkbox [(ngModel)]="is_tutor" name="is_tutor">Soy tutor</mat-checkbox>
+          <mat-checkbox [(ngModel)]="is_student" name="is_student">Soy estudiante</mat-checkbox>
+        </div>
+        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="!regForm.valid">
+          Registrarse
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <a mat-button routerLink="/login">Ya tengo cuenta</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

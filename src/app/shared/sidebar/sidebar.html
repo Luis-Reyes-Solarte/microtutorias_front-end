@@ -1,0 +1,19 @@
+<mat-nav-list>
+  <div class="user-info">
+    <mat-icon class="avatar">account_circle</mat-icon>
+    <span class="username">Usuario</span>
+  </div>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="/subjects" (click)="close.emit()">
+    <mat-icon matListItemIcon>book</mat-icon>
+    <span matListItemTitle>Subjects</span>
+  </a>
+  <a mat-list-item routerLink="/users" (click)="close.emit()">
+    <mat-icon matListItemIcon>people</mat-icon>
+    <span matListItemTitle>Users</span>
+  </a>
+  <mat-divider></mat-divider>
+  <div class="future-section">
+    <p class="future-label">Próximamente</p>
+  </div>
+</mat-nav-list>

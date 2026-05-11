@@ -1,0 +1,12 @@
+.layout-container {
+  height: 100vh;
+}
+
+.app-sidenav {
+  width: 260px;
+  border-right: 1px solid var(--mat-sys-outline-variant);
+}
+
+.main-content {
+  padding: 24px;
+}

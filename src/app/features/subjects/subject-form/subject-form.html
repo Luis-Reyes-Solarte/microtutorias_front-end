@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h1>{{ isEdit ? 'Editar' : 'Nueva' }} materia</h1>
+</div>
+
+<mat-card>
+  <mat-card-content>
+    <form #subjectForm="ngForm" (submit)="save()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="model.name" name="name" required>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-button routerLink="/subjects">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!subjectForm.valid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

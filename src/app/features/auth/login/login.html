@@ -1,0 +1,32 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (error) {
+        <mat-error class="error-msg">{{ error }}</mat-error>
+      }
+      <form #loginForm="ngForm" (submit)="login()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input matInput [(ngModel)]="username" name="username" required>
+          <mat-icon matIconPrefix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput [type]="hide() ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+          <button mat-icon-button matIconSuffix (click)="hide.set(!hide())" type="button">
+            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="!loginForm.valid">
+          Ingresar
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <a mat-button routerLink="/register">Crear cuenta</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,11 @@
+<mat-drawer-container class="layout-container" autosize>
+  <mat-drawer #sidenav mode="side" opened class="app-sidenav">
+    <app-sidebar (close)="sidenav.close()"></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-navbar (toggle)="toggleSidenav()"></app-navbar>
+    <main class="main-content">
+      <router-outlet />
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>

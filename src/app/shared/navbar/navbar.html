@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggle.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="cursor: pointer;" routerLink="/">Micro-tutorías</span>
+  <span class="spacer"></span>
+  @if (authService.isLoggedIn()) {
+    <button mat-button (click)="authService.logout()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  } @else {
+    <button mat-button routerLink="/login">
+      <mat-icon>login</mat-icon>
+      Iniciar sesión
+    </button>
+  }
+</mat-toolbar>

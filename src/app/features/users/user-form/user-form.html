@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>{{ isEdit ? 'Editar' : 'Nuevo' }} usuario</h1>
+</div>
+
+<mat-card>
+  <mat-card-content>
+    <form #userForm="ngForm" (submit)="save()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput [(ngModel)]="model.username" name="username" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="model.email" name="email" required>
+      </mat-form-field>
+
+      @if (!isEdit || model.password) {
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" [(ngModel)]="model.password" name="password" [required]="!isEdit">
+        </mat-form-field>
+      }
+
+      <div class="checkbox-group">
+        <mat-checkbox [(ngModel)]="model.is_tutor" name="is_tutor">Tutor</mat-checkbox>
+        <mat-checkbox [(ngModel)]="model.is_student" name="is_student">Estudiante</mat-checkbox>
+      </div>
+
+      <div class="actions">
+        <button mat-button routerLink="/users">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
