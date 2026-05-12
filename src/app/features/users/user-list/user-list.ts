@@ -1,12 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { DatePipe, AsyncPipe } from '@angular/common';
+import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
+import { map } from 'rxjs/operators'; // ¡No olvides este!
 
 @Component({
   selector: 'app-user-list',
@@ -17,6 +19,7 @@ import { User } from '../../../core/models/user.model';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    AsyncPipe,
   ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
@@ -24,17 +27,37 @@ import { User } from '../../../core/models/user.model';
 export class UserList implements OnInit {
   private readonly userService = inject(UserService);
 
-  users: User[] = [];
-  displayedColumns = ['id', 'username', 'email', 'is_tutor', 'is_student', 'date_joined', 'actions'];
+  @ViewChild(MatTable) table!: MatTable<User>; // 3. Obtener referencia a la tabla
 
-  ngOnInit() {
-    this.userService.list().subscribe((data) => (this.users = data));
-  }
+  // Usamos un Subject para disparar recargas de datos
+  private refreshUsers$ = new BehaviorSubject<void>(undefined);
+
+  // El observable que el HTML consumirá con el pipe | async
+  users$: Observable<User[]> = this.refreshUsers$.pipe(switchMap(() => this.userService.list()));
+
+  displayedColumns = [
+    'id',
+    'username',
+    'email',
+    'is_tutor',
+    'is_student',
+    'date_joined',
+    'actions',
+  ];
+
+  ngOnInit() {}
 
   deleteUser(id: number) {
     if (confirm('¿Eliminar este usuario?')) {
-      this.userService.delete(id).subscribe(() => {
-        this.users = this.users.filter((u) => u.id !== id);
+      this.userService.delete(id).subscribe({
+        next: () => {
+          // Opción A: Recargar de la API (más seguro)
+          this.refreshUsers$.next();
+
+          // Opción B: Si prefieres borrarlo localmente sin recargar:
+          // Deberías cambiar la lógica de users$ para que soporte filtrado local.
+        },
+        error: (err) => console.error('Error al borrar', err),
       });
     }
   }

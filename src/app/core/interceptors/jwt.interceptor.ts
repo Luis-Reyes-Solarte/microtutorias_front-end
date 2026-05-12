@@ -18,10 +18,10 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401) {
         // Attempt to refresh the token
         return authService.refreshToken().pipe(
-          switchMap((newToken) => {
+          switchMap((res) => {
             // Clone the request with the new token
             const clonedRequest = req.clone({
-              setHeaders: { Authorization: `Bearer ${newToken}` },
+              setHeaders: { Authorization: `Bearer ${res.access}` },
             });
             return next(clonedRequest);
           }),
