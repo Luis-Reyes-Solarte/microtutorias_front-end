@@ -1,7 +1,7 @@
 <mat-nav-list>
   <div class="user-info">
     <mat-icon class="avatar">account_circle</mat-icon>
-    <span class="username">Usuario</span>
+    <span class="username"> {{ auth.currentUser() }} </span>
   </div>
   <mat-divider></mat-divider>
   <a mat-list-item routerLink="/subjects" (click)="close.emit()">

@@ -16,6 +16,7 @@ export class AuthService {
   private readonly userKey = 'current_user';
 
   readonly isLoggedIn = signal(false);
+  readonly currentUser = signal<string | null>(localStorage.getItem(this.userKey));
 
   constructor(
     private http: HttpClient,
@@ -34,7 +35,9 @@ export class AuthService {
         tap((res) => {
           localStorage.setItem(this.tokenKey, res.access);
           localStorage.setItem(this.refreshKey, res.refresh);
+          localStorage.setItem(this.userKey, username);
           this.isLoggedIn.set(true);
+          this.currentUser.set(localStorage.getItem(this.userKey));
         }),
       );
   }
