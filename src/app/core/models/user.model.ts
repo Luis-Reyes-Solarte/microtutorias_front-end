@@ -4,6 +4,7 @@ export interface User {
   email?: string;
   is_tutor: boolean;
   is_student: boolean;
+  is_staff?: boolean;
   date_joined?: string;
   password?: string;
 }
