@@ -28,4 +28,16 @@ export class UserService {
   delete(id: number) {
     return this.http.delete(`${this.url}${id}/`);
   }
+
+  me() {
+    return this.http.get<User>(`${this.url}me/`);
+  }
+
+  updateMe(data: Partial<User>) {
+    return this.http.patch<User>(`${this.url}me/`, data);
+  }
+
+  changePassword(data: { old_password: string; new_password: string; confirm_new_password: string }) {
+    return this.http.post<{ detail: string }>(`${this.url}change_password/`, data);
+  }
 }
