@@ -56,7 +56,7 @@ export class Register {
       .subscribe({
         next: () => {
           this.auth.login(this.username, this.password).subscribe({
-            next: () => this.router.navigate(['/subjects']),
+            next: () => this.router.navigate(['/']),
           });
         },
         error: (err) => {

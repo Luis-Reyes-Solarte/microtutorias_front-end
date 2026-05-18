@@ -34,7 +34,7 @@ export class Login {
   login() {
     this.error = '';
     this.auth.login(this.username, this.password).subscribe({
-      next: () => this.router.navigate(['/subjects']),
+      next: () => this.router.navigate(['/']),
       error: () => (this.error = 'Credenciales inválidas'),
     });
   }
