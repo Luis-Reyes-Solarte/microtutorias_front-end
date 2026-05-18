@@ -1,0 +1,73 @@
+.profile h1 {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.field-group {
+  margin-bottom: 16px;
+}
+
+.section-divider {
+  margin: 16px 0;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--mat-sys-outline);
+  margin: 0 0 12px;
+}
+
+.roles-group {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--mat-sys-surface-dim);
+  border-radius: 8px;
+}
+
+.info p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.password-card {
+  margin-top: 24px;
+}
+
+.success-msg {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.error-msg {
+  background: #ffebee;
+  color: #c62828;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,109 @@
+<div class="profile">
+  <h1>Mi perfil</h1>
+
+  @if (success) {
+    <div class="success-msg">{{ success }}</div>
+  }
+  @if (error) {
+    <div class="error-msg">{{ error }}</div>
+  }
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ model.username }}</mat-card-title>
+      <mat-card-subtitle>{{ roleLabel }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form #profileForm="ngForm" (submit)="save()">
+        <div class="field-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Usuario</mat-label>
+            <input matInput [(ngModel)]="model.username" name="username" required [readonly]="!editing">
+            <mat-icon matIconPrefix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="model.email" name="email" required [readonly]="!editing">
+            <mat-icon matIconPrefix>email</mat-icon>
+          </mat-form-field>
+        </div>
+
+        @if (editing && !authService.isAdmin()) {
+          <mat-divider class="section-divider"></mat-divider>
+          <p class="section-title">Roles</p>
+          <div class="roles-group">
+            <mat-slide-toggle
+              [(ngModel)]="model.is_tutor"
+              name="is_tutor"
+              [disabled]="!editing">
+              Tutor
+            </mat-slide-toggle>
+            <mat-slide-toggle
+              [(ngModel)]="model.is_student"
+              name="is_student"
+              [disabled]="!editing">
+              Estudiante
+            </mat-slide-toggle>
+          </div>
+        }
+
+        <div class="info">
+          <p><strong>Fecha de registro:</strong> {{ model.date_joined | date:'mediumDate' }}</p>
+          <p><strong>Roles:</strong> {{ roleLabel }}</p>
+        </div>
+
+        <div class="actions">
+          @if (!editing) {
+            <button mat-raised-button color="primary" type="button" (click)="toggleEdit()">
+              <mat-icon>edit</mat-icon> Editar perfil
+            </button>
+          } @else {
+            <button mat-button type="button" (click)="toggleEdit()">Cancelar</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">
+              <mat-icon>save</mat-icon> Guardar cambios
+            </button>
+          }
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="password-card">
+    <mat-card-header>
+      <mat-card-title>Cambiar contraseña</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (passSuccess) {
+        <div class="success-msg">{{ passSuccess }}</div>
+      }
+      @if (passError) {
+        <div class="error-msg">{{ passError }}</div>
+      }
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña actual</mat-label>
+        <input matInput type="password" [(ngModel)]="oldPassword" name="oldPassword">
+        <mat-icon matIconPrefix>lock</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nueva contraseña</mat-label>
+        <input matInput type="password" [(ngModel)]="newPassword" name="newPassword">
+        <mat-icon matIconPrefix>lock</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Confirmar nueva contraseña</mat-label>
+        <input matInput type="password" [(ngModel)]="confirmNewPassword" name="confirmNewPassword">
+        <mat-icon matIconPrefix>lock</mat-icon>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="changePassword()">
+          <mat-icon>key</mat-icon> Cambiar contraseña
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
