@@ -1,0 +1,100 @@
+<div class="dashboard">
+  <h1>Dashboard</h1>
+
+  @if (auth.isAdmin()) {
+    <div class="cards">
+      <mat-card class="card" routerLink="/users">
+        <mat-card-content>
+          <mat-icon class="card-icon">people</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ totalUsers }}</span>
+            <span class="card-label">Usuarios</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card" routerLink="/subjects">
+        <mat-card-content>
+          <mat-icon class="card-icon">book</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ totalSubjects }}</span>
+            <span class="card-label">Materias</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card" routerLink="/tutorias">
+        <mat-card-content>
+          <mat-icon class="card-icon">school</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ totalTutorings }}</span>
+            <span class="card-label">Tutorías</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card" routerLink="/my-bookings">
+        <mat-card-content>
+          <mat-icon class="card-icon">event_note</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ totalBookings }}</span>
+            <span class="card-label">Reservas</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+
+  @if (auth.isTutor() && !auth.isAdmin()) {
+    <div class="cards">
+      <mat-card class="card" routerLink="/my-tutorias">
+        <mat-card-content>
+          <mat-icon class="card-icon">school</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ totalTutorings }}</span>
+            <span class="card-label">Mis anuncios</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="card" routerLink="/tutor-bookings">
+        <mat-card-content>
+          <mat-icon class="card-icon">event_note</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ myBookings.length }}</span>
+            <span class="card-label">Solicitudes recibidas</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="section">
+      <h2>Acciones rápidas</h2>
+      <div class="quick-actions">
+        <button mat-raised-button color="primary" routerLink="/tutorias/new">
+          <mat-icon>add</mat-icon> Crear anuncio
+        </button>
+        <button mat-raised-button routerLink="/tutorias">
+          <mat-icon>search</mat-icon> Ver tutorías disponibles
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (auth.isStudent() && !auth.isTutor()) {
+    <div class="cards">
+      <mat-card class="card" routerLink="/my-bookings">
+        <mat-card-content>
+          <mat-icon class="card-icon">event_note</mat-icon>
+          <div class="card-info">
+            <span class="card-value">{{ myBookings.length }}</span>
+            <span class="card-label">Mis reservas</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="section">
+      <h2>Acciones rápidas</h2>
+      <div class="quick-actions">
+        <button mat-raised-button color="primary" routerLink="/tutorias">
+          <mat-icon>search</mat-icon> Buscar tutorías
+        </button>
+      </div>
+    </div>
+  }
+</div>

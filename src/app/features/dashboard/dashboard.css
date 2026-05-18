@@ -1,0 +1,66 @@
+.dashboard h1 {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.card-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--mat-sys-primary);
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.card-label {
+  font-size: 0.85rem;
+  color: var(--mat-sys-outline);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
