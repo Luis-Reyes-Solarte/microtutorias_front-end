@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>Dejar una reseña</h1>
+</div>
+
+@if (booking) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ booking.tutoring_detail?.subject_name || 'Tutoría' }}</mat-card-title>
+      <mat-card-subtitle>
+        Tutor: {{ booking.tutoring_detail?.tutor_detail?.username || '-' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      @if (success) {
+        <div class="success-msg">{{ success }}</div>
+      }
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+
+      <div class="rating-section">
+        <p class="rating-label">Calificación</p>
+        <div class="stars">
+          @for (star of [1,2,3,4,5]; track star) {
+            <mat-icon
+              class="star"
+              [class.filled]="star <= (hoverRating || rating)"
+              (mouseenter)="hoverRating = star"
+              (mouseleave)="hoverRating = 0"
+              (click)="setRating(star)">
+              {{ star <= (hoverRating || rating) ? 'star' : 'star_border' }}
+            </mat-icon>
+          }
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Comentario (opcional)</mat-label>
+        <textarea matInput [(ngModel)]="comment" name="comment" rows="4" placeholder="Describe tu experiencia..."></textarea>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-button routerLink="/my-bookings">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="submitReview()" [disabled]="loading">
+          <mat-icon>send</mat-icon> Enviar reseña
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+} @else {
+  <p class="loading">Cargando información de la reserva...</p>
+}
