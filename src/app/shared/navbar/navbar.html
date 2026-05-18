@@ -5,10 +5,21 @@
   <span style="cursor: pointer;" routerLink="/">Micro-tutorías</span>
   <span class="spacer"></span>
   @if (authService.isLoggedIn()) {
-    <button mat-button (click)="authService.logout()">
-      <mat-icon>logout</mat-icon>
-      Cerrar sesión
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ authService.currentUser() }}
+      <mat-icon>arrow_drop_down</mat-icon>
     </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        Mi perfil
+      </button>
+      <button mat-menu-item (click)="authService.logout()">
+        <mat-icon>logout</mat-icon>
+        Cerrar sesión
+      </button>
+    </mat-menu>
   } @else {
     <button mat-button routerLink="/login">
       <mat-icon>login</mat-icon>
