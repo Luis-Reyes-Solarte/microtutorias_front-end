@@ -1,0 +1,66 @@
+<div class="page-header">
+  <h1>Tutorías disponibles</h1>
+  @if (auth.isTutor()) {
+    <button mat-raised-button color="primary" routerLink="/tutorias/new">
+      <mat-icon>add</mat-icon> Nuevo anuncio
+    </button>
+  }
+</div>
+
+<div class="filters">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Buscar</mat-label>
+    <input matInput [(ngModel)]="searchText" placeholder="Buscar por materia o descripción">
+    <mat-icon matIconPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="subject-field">
+    <mat-label>Filtrar por materia</mat-label>
+    <mat-select [(ngModel)]="selectedSubject">
+      <mat-option value="">Todas</mat-option>
+      @for (sub of subjects; track sub.id) {
+        <mat-option [value]="sub.id">{{ sub.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+@if (bookingSuccess) {
+  <div class="success-msg">{{ bookingSuccess }}</div>
+}
+@if (bookingError) {
+  <div class="error-msg">{{ bookingError }}</div>
+}
+
+@if (loading) {
+  <p class="loading">Cargando tutorías...</p>
+} @else if (filteredTutorings.length === 0) {
+  <p class="empty">No hay tutorías disponibles con los filtros seleccionados.</p>
+} @else {
+  <div class="tutoring-grid">
+    @for (t of filteredTutorings; track t.id) {
+      <mat-card class="tutoring-card">
+        <mat-card-header>
+          <mat-card-title>{{ t.subject_name }}</mat-card-title>
+          <mat-card-subtitle>
+            Tutor: {{ t.tutor_detail?.username }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">{{ t.description }}</p>
+          <div class="details">
+            <span class="price">${{ t.price_per_hour }}/hora</span>
+            <span class="date">{{ t.available_date | date:'medium' }}</span>
+          </div>
+        </mat-card-content>
+        @if (auth.isStudent()) {
+          <mat-card-actions align="end">
+            <button mat-raised-button color="primary" (click)="requestBooking(t.id!)">
+              Solicitar reserva
+            </button>
+          </mat-card-actions>
+        }
+      </mat-card>
+    }
+  </div>
+}
