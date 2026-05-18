@@ -1,0 +1,53 @@
+<div class="page-header">
+  <h1>Mis anuncios de tutoría</h1>
+  <button mat-raised-button color="primary" routerLink="/tutorias/new">
+    <mat-icon>add</mat-icon> Nuevo anuncio
+  </button>
+</div>
+
+<mat-card>
+  <div class="table-container">
+    @if (tutorings$ | async; as data) {
+      <table mat-table [dataSource]="data">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let t">{{ t.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef>Materia</th>
+          <td mat-cell *matCellDef="let t">{{ t.subject_name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let t" class="desc-cell">{{ t.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell *matCellDef="let t">${{ t.price_per_hour }}</td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let t">{{ t.available_date | date:'short' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let t">
+            <button mat-icon-button color="primary" [routerLink]="['/tutorias', t.id, 'edit']">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteTutoring(t.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    } @else {
+      <p class="loading">Cargando...</p>
+    }
+    @if ((tutorings$ | async)?.length === 0) {
+      <div class="empty">No tienes anuncios de tutoría. Crea uno nuevo.</div>
+    }
+  </div>
+</mat-card>
