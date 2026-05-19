@@ -8,9 +8,12 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('access_token');
 
   if (token) {
-    req = req.clone({
-      setHeaders: { Authorization: `Bearer ${token}` },
-    });
+    const isRegister = req.method === 'POST' && req.url.endsWith('/users/');
+    if (!isRegister) {
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+    }
   }
 
   return next(req).pipe(
