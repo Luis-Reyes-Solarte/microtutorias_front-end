@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -15,6 +15,7 @@ import { BookingService } from '../../../core/services/booking.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { TutoringAd } from '../../../core/models/tutoring.model';
 import { Subject } from '../../../core/models/subject.model';
+import { BehaviorSubject, switchMap, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-tutoring-list',
@@ -33,7 +34,7 @@ import { Subject } from '../../../core/models/subject.model';
   templateUrl: './tutoring-list.html',
   styleUrl: './tutoring-list.css',
 })
-export class TutoringList implements OnInit {
+export class TutoringList {
   private readonly tutoringService = inject(TutoringService);
   private readonly subjectService = inject(SubjectService);
   private readonly bookingService = inject(BookingService);
@@ -43,17 +44,23 @@ export class TutoringList implements OnInit {
   subjects: Subject[] = [];
   searchText = '';
   selectedSubject = '';
-  loading = false;
+  loading = true;
   bookingError = '';
   bookingSuccess = '';
 
-  ngOnInit() {
-    this.loading = true;
-    this.tutoringService.list().subscribe((data) => {
-      this.tutorings = data;
+  private refresh$ = new BehaviorSubject<void>(undefined);
+
+  constructor() {
+    this.refresh$.pipe(
+      switchMap(() => forkJoin({
+        tutorings: this.tutoringService.list(),
+        subjects: this.subjectService.list(),
+      })),
+    ).subscribe(({ tutorings, subjects }) => {
+      this.tutorings = tutorings;
+      this.subjects = subjects;
       this.loading = false;
     });
-    this.subjectService.list().subscribe((data) => (this.subjects = data));
   }
 
   get filteredTutorings(): TutoringAd[] {
