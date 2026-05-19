@@ -18,7 +18,7 @@
     <mat-label>Filtrar por materia</mat-label>
     <mat-select [(ngModel)]="selectedSubject">
       <mat-option value="">Todas</mat-option>
-      @for (sub of subjects; track sub.id) {
+      @for (sub of data.subjects; track sub.id) {
         <mat-option [value]="sub.id">{{ sub.name }}</mat-option>
       }
     </mat-select>
@@ -32,35 +32,41 @@
   <div class="error-msg">{{ bookingError }}</div>
 }
 
-@if (loading) {
-  <p class="loading">Cargando tutorías...</p>
-} @else if (filteredTutorings.length === 0) {
-  <p class="empty">No hay tutorías disponibles con los filtros seleccionados.</p>
-} @else {
-  <div class="tutoring-grid">
-    @for (t of filteredTutorings; track t.id) {
-      <mat-card class="tutoring-card">
-        <mat-card-header>
-          <mat-card-title>{{ t.subject_name }}</mat-card-title>
-          <mat-card-subtitle>
-            Tutor: {{ t.tutor_detail?.username }}
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="description">{{ t.description }}</p>
-          <div class="details">
-            <span class="price">${{ t.price_per_hour }}/hora</span>
-            <span class="date">{{ t.available_date | date:'medium' }}</span>
-          </div>
-        </mat-card-content>
-        @if (auth.isStudent()) {
-          <mat-card-actions align="end">
-            <button mat-raised-button color="primary" (click)="requestBooking(t.id!)">
-              Solicitar reserva
-            </button>
-          </mat-card-actions>
+@if (data$ | async; as data) {
+  @if (data.tutorings.length === 0) {
+    <p class="empty">No hay tutorías disponibles.</p>
+  } @else {
+    @if (filteredTutorings(data.tutorings).length === 0) {
+      <p class="empty">No hay tutorías disponibles con los filtros seleccionados.</p>
+    } @else {
+      <div class="tutoring-grid">
+        @for (t of filteredTutorings(data.tutorings); track t.id) {
+          <mat-card class="tutoring-card">
+            <mat-card-header>
+              <mat-card-title>{{ t.subject_name }}</mat-card-title>
+              <mat-card-subtitle>
+                Tutor: {{ t.tutor_detail?.username }}
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p class="description">{{ t.description }}</p>
+              <div class="details">
+                <span class="price">${{ t.price_per_hour }}/hora</span>
+                <span class="date">{{ t.available_date | date:'medium' }}</span>
+              </div>
+            </mat-card-content>
+            @if (auth.isStudent()) {
+              <mat-card-actions align="end">
+                <button mat-raised-button color="primary" (click)="requestBooking(t.id!)">
+                  Solicitar reserva
+                </button>
+              </mat-card-actions>
+            }
+          </mat-card>
         }
-      </mat-card>
+      </div>
     }
-  </div>
+  }
+} @else {
+  <p class="loading">Cargando tutorías...</p>
 }

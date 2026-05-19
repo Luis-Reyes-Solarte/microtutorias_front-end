@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,12 @@ import { BookingService } from '../../../core/services/booking.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { TutoringAd } from '../../../core/models/tutoring.model';
 import { Subject } from '../../../core/models/subject.model';
-import { BehaviorSubject, switchMap, forkJoin } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, forkJoin, map } from 'rxjs';
+
+interface TutoringListData {
+  tutorings: TutoringAd[];
+  subjects: Subject[];
+}
 
 @Component({
   selector: 'app-tutoring-list',
@@ -23,6 +28,7 @@ import { BehaviorSubject, switchMap, forkJoin } from 'rxjs';
     RouterLink,
     FormsModule,
     DatePipe,
+    AsyncPipe,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -40,31 +46,23 @@ export class TutoringList {
   private readonly bookingService = inject(BookingService);
   readonly auth = inject(AuthService);
 
-  tutorings: TutoringAd[] = [];
-  subjects: Subject[] = [];
   searchText = '';
   selectedSubject = '';
-  loading = true;
   bookingError = '';
   bookingSuccess = '';
 
   private refresh$ = new BehaviorSubject<void>(undefined);
 
-  constructor() {
-    this.refresh$.pipe(
-      switchMap(() => forkJoin({
-        tutorings: this.tutoringService.list(),
-        subjects: this.subjectService.list(),
-      })),
-    ).subscribe(({ tutorings, subjects }) => {
-      this.tutorings = tutorings;
-      this.subjects = subjects;
-      this.loading = false;
-    });
-  }
+  data$: Observable<TutoringListData> = this.refresh$.pipe(
+    switchMap(() => forkJoin({
+      tutorings: this.tutoringService.list(),
+      subjects: this.subjectService.list(),
+    })),
+    map(({ tutorings, subjects }) => ({ tutorings, subjects }))
+  );
 
-  get filteredTutorings(): TutoringAd[] {
-    return this.tutorings.filter((t) => {
+  filteredTutorings(tutorings: TutoringAd[]): TutoringAd[] {
+    return tutorings.filter((t) => {
       const matchText =
         !this.searchText ||
         t.description.toLowerCase().includes(this.searchText.toLowerCase()) ||
