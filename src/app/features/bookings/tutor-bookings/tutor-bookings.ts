@@ -28,7 +28,7 @@ export class TutorBookings {
 
   private refresh$ = new BehaviorSubject<void>(undefined);
   bookings$: Observable<Booking[]> = this.refresh$.pipe(
-    switchMap(() => this.bookingService.list())
+    switchMap(() => this.bookingService.listRequests())
   );
 
   displayedColumns = ['student', 'tutoring', 'status', 'created_at', 'actions'];

@@ -13,6 +13,14 @@ export class BookingService {
     return this.http.get<Booking[]>(this.url);
   }
 
+  listMine() {
+    return this.http.get<Booking[]>(`${this.url}?as=student`);
+  }
+
+  listRequests() {
+    return this.http.get<Booking[]>(`${this.url}?as=tutor`);
+  }
+
   get(id: number) {
     return this.http.get<Booking>(`${this.url}${id}/`);
   }
