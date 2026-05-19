@@ -129,3 +129,8 @@ mat-card:hover {
 .status-chip.mat-mdc-chip {
   font-size: 0.8rem;
 }
+
+/* Select dropdown panel background */
+.mat-mdc-select-panel {
+  background: #ffffff !important;
+}
