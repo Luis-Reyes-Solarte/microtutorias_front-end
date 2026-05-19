@@ -1,3 +1,57 @@
+:host {
+  display: block;
+}
+
+.navbar {
+  background: linear-gradient(135deg, #0d2137 0%, #132d4a 100%) !important;
+  color: #d6e3f5 !important;
+  box-shadow: 0 2px 12px rgba(13,33,55,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 56px;
+}
+
+.navbar .brand {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  margin-left: 4px;
+}
+
 .spacer {
   flex: 1 1 auto;
+}
+
+.navbar .menu-btn {
+  color: #90b4d9;
+}
+
+.navbar .user-btn {
+  color: #d6e3f5;
+  font-weight: 400;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar .user-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.navbar .login-btn {
+  color: #d6e3f5;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  padding: 0 16px;
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.navbar .login-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.3);
 }

@@ -4,9 +4,11 @@
 
 .app-sidenav {
   width: 260px;
-  border-right: 1px solid var(--mat-sys-outline-variant);
+  border: none;
+  background: transparent;
 }
 
 .main-content {
-  padding: 24px;
+  padding: 28px;
+  min-height: calc(100vh - 56px);
 }

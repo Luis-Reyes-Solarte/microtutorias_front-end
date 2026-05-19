@@ -1,38 +1,60 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+
+$blue-primary: (
+  0: #000000,
+  10: #001a33,
+  20: #002e5c,
+  25: #003a73,
+  30: #00478a,
+  35: #0054a1,
+  40: #1565c0,
+  50: #1976d2,
+  60: #1e88e5,
+  70: #42a5f5,
+  80: #64b5f6,
+  90: #90caf9,
+  95: #b3dafc,
+  98: #d9edff,
+  99: #ecf5ff,
+  100: #ffffff,
+);
+
+$blue-tertiary: (
+  0: #000000,
+  10: #001f33,
+  20: #003552,
+  25: #00436a,
+  30: #005282,
+  35: #00619b,
+  40: #0077b6,
+  50: #0091d4,
+  60: #00aaf2,
+  70: #48bcf5,
+  80: #7bcff7,
+  90: #a8e2fa,
+  95: #d2f0fc,
+  98: #eaf8ff,
+  99: #f5fbff,
+  100: #ffffff,
+);
 
 html {
   height: 100%;
-  @include mat.theme(
-    (
-      color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: Roboto,
-      density: 0,
-    )
-  );
+  @include mat.theme((
+    color: (
+      primary: $blue-primary,
+      tertiary: $blue-tertiary,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  background: linear-gradient(135deg, #eef2f7 0%, #f8f9fc 100%);
+  color: #1a2332;
   font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
   margin: 0;
   height: 100%;
 }

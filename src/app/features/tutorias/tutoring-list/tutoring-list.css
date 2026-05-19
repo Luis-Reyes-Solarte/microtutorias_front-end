@@ -1,14 +1,5 @@
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.page-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
+:host {
+  display: block;
 }
 
 .filters {
@@ -16,11 +7,12 @@
   gap: 16px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .search-field {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .subject-field {
@@ -30,20 +22,23 @@
 .tutoring-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
 .tutoring-card {
   transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
 }
 
 .tutoring-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(13,33,55,0.1) !important;
 }
 
 .description {
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.5;
   margin: 8px 0;
@@ -59,35 +54,12 @@
 }
 
 .price {
-  font-weight: 500;
-  color: var(--mat-sys-primary);
+  font-weight: 600;
+  color: #1565c0;
   font-size: 1.1rem;
 }
 
 .date {
   font-size: 0.85rem;
-  color: var(--mat-sys-outline);
-}
-
-.loading, .empty {
-  text-align: center;
-  padding: 48px;
-  color: var(--mat-sys-outline);
-  font-size: 1rem;
-}
-
-.success-msg {
-  background: #e8f5e9;
-  color: #2e7d32;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.error-msg {
-  background: #ffebee;
-  color: #c62828;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  color: var(--text-secondary);
 }

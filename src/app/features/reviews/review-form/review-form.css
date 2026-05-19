@@ -1,16 +1,5 @@
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.full-width {
-  width: 100%;
-  margin-bottom: 16px;
+:host {
+  display: block;
 }
 
 .rating-section {
@@ -21,11 +10,12 @@
   font-size: 0.9rem;
   font-weight: 500;
   margin: 0 0 8px;
+  color: var(--text-primary);
 }
 
 .stars {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .star {
@@ -33,42 +23,21 @@
   width: 36px;
   height: 36px;
   cursor: pointer;
-  color: var(--mat-sys-outline);
+  color: #d0d7e0;
   transition: color 0.2s, transform 0.2s;
 }
 
 .star:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .star.filled {
-  color: #ffc107;
+  color: #ffb300;
 }
 
 .actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-}
-
-.success-msg {
-  background: #e8f5e9;
-  color: #2e7d32;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.error-msg {
-  background: #ffebee;
-  color: #c62828;
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
-}
-
-.loading {
-  text-align: center;
-  padding: 48px;
-  color: var(--mat-sys-outline);
+  margin-top: 8px;
 }
