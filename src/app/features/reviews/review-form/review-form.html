@@ -2,7 +2,7 @@
   <h1>Dejar una reseña</h1>
 </div>
 
-@if (booking) {
+@if (booking$ | async; as booking) {
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{ booking.tutoring_detail?.subject_name || 'Tutoría' }}</mat-card-title>
@@ -41,7 +41,7 @@
 
       <div class="actions">
         <button mat-button routerLink="/my-bookings">Cancelar</button>
-        <button mat-raised-button color="primary" (click)="submitReview()" [disabled]="loading">
+        <button mat-raised-button color="primary" (click)="submitReview(booking)" [disabled]="loading">
           <mat-icon>send</mat-icon> Enviar reseña
         </button>
       </div>
