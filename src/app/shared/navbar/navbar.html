@@ -1,11 +1,11 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggle.emit()">
+<mat-toolbar class="navbar">
+  <button mat-icon-button class="menu-btn" (click)="toggle.emit()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span style="cursor: pointer;" routerLink="/">Micro-tutorías</span>
+  <span class="brand" routerLink="/">Micro-tutorías</span>
   <span class="spacer"></span>
   @if (authService.isLoggedIn()) {
-    <button mat-button [matMenuTriggerFor]="userMenu">
+    <button mat-button class="user-btn" [matMenuTriggerFor]="userMenu">
       <mat-icon>account_circle</mat-icon>
       {{ authService.currentUser() }}
       <mat-icon>arrow_drop_down</mat-icon>
@@ -21,7 +21,7 @@
       </button>
     </mat-menu>
   } @else {
-    <button mat-button routerLink="/login">
+    <button mat-button class="login-btn" routerLink="/login">
       <mat-icon>login</mat-icon>
       Iniciar sesión
     </button>

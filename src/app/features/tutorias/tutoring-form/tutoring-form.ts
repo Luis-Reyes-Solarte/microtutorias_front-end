@@ -35,10 +35,11 @@ export class TutoringForm implements OnInit {
 
   isEdit = false;
   subjects: Subject[] = [];
+  error = '';
   model: Partial<TutoringAd> = {
     subject: undefined,
     description: '',
-    price_per_hour: '',
+    price_per_hour: null as unknown as string,
     available_date: '',
   };
 
@@ -51,11 +52,35 @@ export class TutoringForm implements OnInit {
     }
   }
 
-  save() {
-    const obs = this.isEdit
-      ? this.tutoringService.update(this.model.id!, this.model)
-      : this.tutoringService.create(this.model);
+  private toISODate(local: string | undefined): string {
+    if (!local) return '';
+    const d = new Date(local);
+    if (isNaN(d.getTime())) return '';
+    return d.toISOString();
+  }
 
-    obs.subscribe(() => this.router.navigate(['/my-tutorias']));
+  save() {
+    this.error = '';
+    const payload = {
+      ...this.model,
+      price_per_hour: Number(this.model.price_per_hour),
+      available_date: this.toISODate(this.model.available_date),
+    } as any;
+
+    const obs = this.isEdit
+      ? this.tutoringService.update(this.model.id!, payload)
+      : this.tutoringService.create(payload);
+
+    obs.subscribe({
+      next: () => this.router.navigate(['/my-tutorias']),
+      error: (err) => {
+        if (err.error) {
+          const msgs = Object.values(err.error).flat().join('\n');
+          this.error = msgs || 'Error al guardar el anuncio';
+        } else {
+          this.error = 'Error al guardar el anuncio';
+        }
+      },
+    });
   }
 }

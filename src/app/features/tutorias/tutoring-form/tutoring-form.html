@@ -5,6 +5,9 @@
 <mat-card>
   <mat-card-content>
     <form #form="ngForm" (submit)="save()">
+      @if (error) {
+        <mat-error class="error-msg">{{ error }}</mat-error>
+      }
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Materia</mat-label>
         <mat-select [(ngModel)]="model.subject" name="subject" required>

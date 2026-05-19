@@ -8,6 +8,6 @@ export interface TutoringAd {
   subject: number;
   subject_name?: string;
   description: string;
-  price_per_hour: string;
+  price_per_hour: number | string;
   available_date: string;
 }
