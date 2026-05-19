@@ -3,19 +3,34 @@
     <mat-icon class="avatar">account_circle</mat-icon>
     <span class="username">{{ auth.currentUser() }}</span>
     <span class="user-role">
-      @if (auth.isAdmin()) { Admin }
-      @else if (auth.isTutor() && auth.isStudent()) { Tutor & Estudiante }
-      @else if (auth.isTutor()) { Tutor }
-      @else { Estudiante }
+      @if (auth.isAdmin()) {
+        Admin
+      } @else if (auth.isTutor() && auth.isStudent()) {
+        Tutor & Estudiante
+      } @else if (auth.isTutor()) {
+        Tutor
+      } @else {
+        Estudiante
+      }
     </span>
   </div>
 </div>
 
 <mat-nav-list>
   <div class="nav-section">General</div>
-  <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" (click)="close.emit()">
+  <a
+    mat-list-item
+    routerLink="/"
+    routerLinkActive="active-link"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="close.emit()"
+  >
     <mat-icon matListItemIcon>dashboard</mat-icon>
     <span matListItemTitle>Dashboard</span>
+  </a>
+  <a mat-list-item routerLink="/tutorias" routerLinkActive="active-link" (click)="close.emit()">
+    <mat-icon matListItemIcon>search</mat-icon>
+    <span matListItemTitle>Buscar tutorías</span>
   </a>
 
   @if (auth.isAdmin()) {
@@ -32,7 +47,12 @@
       <mat-icon matListItemIcon>school</mat-icon>
       <span matListItemTitle>Tutorías</span>
     </a>
-    <a mat-list-item routerLink="/my-bookings" routerLinkActive="active-link" (click)="close.emit()">
+    <a
+      mat-list-item
+      routerLink="/my-bookings"
+      routerLinkActive="active-link"
+      (click)="close.emit()"
+    >
       <mat-icon matListItemIcon>event_note</mat-icon>
       <span matListItemTitle>Reservas</span>
     </a>
@@ -40,15 +60,22 @@
 
   @if (auth.isTutor() && !auth.isAdmin()) {
     <div class="nav-section">Tutor</div>
-    <a mat-list-item routerLink="/tutorias" routerLinkActive="active-link" (click)="close.emit()">
-      <mat-icon matListItemIcon>search</mat-icon>
-      <span matListItemTitle>Buscar tutorías</span>
-    </a>
-    <a mat-list-item routerLink="/my-tutorias" routerLinkActive="active-link" (click)="close.emit()">
+
+    <a
+      mat-list-item
+      routerLink="/my-tutorias"
+      routerLinkActive="active-link"
+      (click)="close.emit()"
+    >
       <mat-icon matListItemIcon>school</mat-icon>
       <span matListItemTitle>Mis anuncios</span>
     </a>
-    <a mat-list-item routerLink="/tutor-bookings" routerLinkActive="active-link" (click)="close.emit()">
+    <a
+      mat-list-item
+      routerLink="/tutor-bookings"
+      routerLinkActive="active-link"
+      (click)="close.emit()"
+    >
       <mat-icon matListItemIcon>event_note</mat-icon>
       <span matListItemTitle>Solicitudes</span>
     </a>
@@ -60,11 +87,12 @@
 
   @if (auth.isStudent() && !auth.isAdmin()) {
     <div class="nav-section">Estudiante</div>
-    <a mat-list-item routerLink="/tutorias" routerLinkActive="active-link" (click)="close.emit()">
-      <mat-icon matListItemIcon>search</mat-icon>
-      <span matListItemTitle>Buscar tutorías</span>
-    </a>
-    <a mat-list-item routerLink="/my-bookings" routerLinkActive="active-link" (click)="close.emit()">
+    <a
+      mat-list-item
+      routerLink="/my-bookings"
+      routerLinkActive="active-link"
+      (click)="close.emit()"
+    >
       <mat-icon matListItemIcon>event_note</mat-icon>
       <span matListItemTitle>Mis reservas</span>
     </a>
