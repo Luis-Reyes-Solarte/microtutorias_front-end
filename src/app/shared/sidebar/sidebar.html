@@ -52,6 +52,10 @@
       <mat-icon matListItemIcon>event_note</mat-icon>
       <span matListItemTitle>Solicitudes</span>
     </a>
+    <a mat-list-item routerLink="/subjects" routerLinkActive="active-link" (click)="close.emit()">
+      <mat-icon matListItemIcon>book</mat-icon>
+      <span matListItemTitle>Materias</span>
+    </a>
   }
 
   @if (auth.isStudent() && !auth.isAdmin()) {

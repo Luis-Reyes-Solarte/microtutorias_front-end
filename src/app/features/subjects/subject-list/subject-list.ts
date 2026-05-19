@@ -5,10 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { SubjectService } from '../../../core/services/subject.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Subject } from '../../../core/models/subject.model';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators'; // ¡No olvides este!
-import { DatePipe, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-subject-list',
@@ -18,17 +18,18 @@ import { DatePipe, AsyncPipe } from '@angular/common';
 })
 export class SubjectList implements OnInit {
   private readonly subjectService = inject(SubjectService);
-  @ViewChild(MatTable) table!: MatTable<Subject>; // 3. Obtener referencia a la tabla
+  readonly auth = inject(AuthService);
+  @ViewChild(MatTable) table!: MatTable<Subject>;
 
-  // Usamos un Subject para disparar recargas de datos
   private refreshSubjects$ = new BehaviorSubject<void>(undefined);
 
-  // El observable que el HTML consumirá con el pipe | async
   Subjects$: Observable<Subject[]> = this.refreshSubjects$.pipe(
     switchMap(() => this.subjectService.list()),
   );
 
-  displayedColumns = ['id', 'name', 'actions'];
+  get displayedColumns(): string[] {
+    return this.auth.isAdmin() ? ['id', 'name', 'actions'] : ['id', 'name'];
+  }
 
   ngOnInit() {}
 
