@@ -1,9 +1,11 @@
 <div class="page-header">
   <h1>Materias</h1>
-  <button mat-raised-button color="primary" routerLink="/subjects/new">
-    <mat-icon>add</mat-icon>
-    Nueva materia
-  </button>
+  @if (auth.isAdmin() || auth.isTutor()) {
+    <button mat-raised-button color="primary" routerLink="/subjects/new">
+      <mat-icon>add</mat-icon>
+      Nueva materia
+    </button>
+  }
 </div>
 
 <mat-card>
