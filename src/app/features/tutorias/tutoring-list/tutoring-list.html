@@ -7,6 +7,14 @@
   }
 </div>
 
+@if (bookingSuccess) {
+  <div class="success-msg">{{ bookingSuccess }}</div>
+}
+@if (bookingError) {
+  <div class="error-msg">{{ bookingError }}</div>
+}
+
+@if (data$ | async; as data) {
 <div class="filters">
   <mat-form-field appearance="outline" class="search-field">
     <mat-label>Buscar</mat-label>
@@ -24,15 +32,6 @@
     </mat-select>
   </mat-form-field>
 </div>
-
-@if (bookingSuccess) {
-  <div class="success-msg">{{ bookingSuccess }}</div>
-}
-@if (bookingError) {
-  <div class="error-msg">{{ bookingError }}</div>
-}
-
-@if (data$ | async; as data) {
   @if (data.tutorings.length === 0) {
     <p class="empty">No hay tutorías disponibles.</p>
   } @else {
