@@ -28,7 +28,7 @@ export class SubjectList implements OnInit {
   );
 
   get displayedColumns(): string[] {
-    return this.auth.isAdmin() ? ['id', 'name', 'actions'] : ['id', 'name'];
+    return this.auth.isAdmin() ? ['name', 'actions'] : ['name'];
   }
 
   ngOnInit() {}

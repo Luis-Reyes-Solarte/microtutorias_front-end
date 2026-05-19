@@ -31,7 +31,7 @@ export class TutorBookings {
     switchMap(() => this.bookingService.list())
   );
 
-  displayedColumns = ['id', 'student', 'tutoring', 'status', 'created_at', 'actions'];
+  displayedColumns = ['student', 'tutoring', 'status', 'created_at', 'actions'];
 
   statusLabel(status: BookingStatus): string {
     return STATUS_LABELS[status] || status;

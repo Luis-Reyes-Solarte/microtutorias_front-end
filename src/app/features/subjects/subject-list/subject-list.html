@@ -12,11 +12,6 @@
   <div class="table-container">
     @if (Subjects$ | async; as users) {
       <table mat-table [dataSource]="(Subjects$ | async) ?? []">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ID</th>
-          <td mat-cell *matCellDef="let s">{{ s.id }}</td>
-        </ng-container>
-
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
           <td mat-cell *matCellDef="let s">{{ s.name }}</td>

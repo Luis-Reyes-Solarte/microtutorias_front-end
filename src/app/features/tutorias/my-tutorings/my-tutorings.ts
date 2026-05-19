@@ -22,10 +22,10 @@ export class MyTutorings {
 
   private refresh$ = new BehaviorSubject<void>(undefined);
   tutorings$: Observable<TutoringAd[]> = this.refresh$.pipe(
-    switchMap(() => this.tutoringService.list())
+    switchMap(() => this.tutoringService.listMine())
   );
 
-  displayedColumns = ['id', 'subject', 'description', 'price', 'date', 'actions'];
+  displayedColumns = ['subject', 'description', 'price', 'date', 'actions'];
 
   deleteTutoring(id: number) {
     if (confirm('Eliminar este anuncio?')) {

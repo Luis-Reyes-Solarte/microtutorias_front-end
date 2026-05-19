@@ -36,7 +36,6 @@ export class UserList implements OnInit {
   users$: Observable<User[]> = this.refreshUsers$.pipe(switchMap(() => this.userService.list()));
 
   displayedColumns = [
-    'id',
     'username',
     'email',
     'is_tutor',
