@@ -13,6 +13,10 @@ export class TutoringService {
     return this.http.get<TutoringAd[]>(this.url);
   }
 
+  listMine() {
+    return this.http.get<TutoringAd[]>(`${this.url}?mine=1`);
+  }
+
   get(id: number) {
     return this.http.get<TutoringAd>(`${this.url}${id}/`);
   }
