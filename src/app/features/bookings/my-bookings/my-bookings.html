@@ -31,7 +31,7 @@
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let b">
               @if (canReview(b)) {
-                <button mat-button color="primary" [routerLink]="['/bookings', b.id, 'review']">
+                <button mat-button color="primary" [routerLink]="['/app/bookings', b.id, 'review']">
                   <mat-icon>rate_review</mat-icon> Reseñar
                 </button>
               }

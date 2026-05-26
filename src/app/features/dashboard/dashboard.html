@@ -4,7 +4,7 @@
 @if (data$ | async; as data) {
   @if (auth.isAdmin()) {
     <div class="cards">
-      <mat-card class="card" routerLink="/users">
+      <mat-card class="card" routerLink="/app/users">
         <mat-card-content>
           <mat-icon class="card-icon">people</mat-icon>
           <div class="card-info">
@@ -13,7 +13,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card class="card" routerLink="/subjects">
+      <mat-card class="card" routerLink="/app/subjects">
         <mat-card-content>
           <mat-icon class="card-icon">book</mat-icon>
           <div class="card-info">
@@ -22,7 +22,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card class="card" routerLink="/tutorias">
+      <mat-card class="card" routerLink="/app/tutorias">
         <mat-card-content>
           <mat-icon class="card-icon">school</mat-icon>
           <div class="card-info">
@@ -31,7 +31,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card class="card" routerLink="/my-bookings">
+      <mat-card class="card" routerLink="/app/my-bookings">
         <mat-card-content>
           <mat-icon class="card-icon">event_note</mat-icon>
           <div class="card-info">
@@ -45,7 +45,7 @@
 
   @if (auth.isTutor() && !auth.isAdmin()) {
     <div class="cards">
-      <mat-card class="card" routerLink="/my-tutorias">
+      <mat-card class="card" routerLink="/app/my-tutorias">
         <mat-card-content>
           <mat-icon class="card-icon">school</mat-icon>
           <div class="card-info">
@@ -54,7 +54,7 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card class="card" routerLink="/tutor-bookings">
+      <mat-card class="card" routerLink="/app/tutor-bookings">
         <mat-card-content>
           <mat-icon class="card-icon">event_note</mat-icon>
           <div class="card-info">
@@ -67,10 +67,10 @@
     <div class="section">
       <h2>Acciones rápidas</h2>
       <div class="quick-actions">
-        <button mat-raised-button color="primary" routerLink="/tutorias/new">
+        <button mat-raised-button color="primary" routerLink="/app/tutorias/new">
           <mat-icon>add</mat-icon> Crear anuncio
         </button>
-        <button mat-raised-button routerLink="/tutorias">
+        <button mat-raised-button routerLink="/app/tutorias">
           <mat-icon>search</mat-icon> Ver tutorías disponibles
         </button>
       </div>
@@ -79,7 +79,7 @@
 
   @if (auth.isStudent() && !auth.isTutor()) {
     <div class="cards">
-      <mat-card class="card" routerLink="/my-bookings">
+      <mat-card class="card" routerLink="/app/my-bookings">
         <mat-card-content>
           <mat-icon class="card-icon">event_note</mat-icon>
           <div class="card-info">
@@ -92,7 +92,7 @@
     <div class="section">
       <h2>Acciones rápidas</h2>
       <div class="quick-actions">
-        <button mat-raised-button color="primary" routerLink="/tutorias">
+        <button mat-raised-button color="primary" routerLink="/app/tutorias">
           <mat-icon>search</mat-icon> Buscar tutorías
         </button>
       </div>

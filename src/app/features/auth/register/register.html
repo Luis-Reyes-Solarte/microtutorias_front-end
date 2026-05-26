@@ -1,4 +1,8 @@
 <div class="register-container">
+  <a routerLink="/" class="back-home" aria-label="Volver al inicio">
+    <mat-icon>arrow_back</mat-icon>
+    Volver al inicio
+  </a>
   <mat-card class="register-card">
     <mat-card-content>
       <div class="brand-logo">
@@ -12,30 +16,48 @@
       <form #regForm="ngForm" (submit)="register()">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Usuario</mat-label>
-          <input matInput [(ngModel)]="username" name="username" required>
+          <input matInput [(ngModel)]="username" name="username" required />
           <mat-icon matIconPrefix>person</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
-          <input matInput type="email" [(ngModel)]="email" name="email" required>
+          <input matInput type="email" [(ngModel)]="email" name="email" />
           <mat-icon matIconPrefix>email</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Contraseña</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+          <input
+            matInput
+            [type]="hide() ? 'password' : 'text'"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
           <button mat-icon-button matIconSuffix (click)="hide.set(!hide())" type="button">
             <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Confirmar contraseña</mat-label>
-          <input matInput type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+          <input
+            matInput
+            type="password"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+          />
         </mat-form-field>
         <div class="checkbox-group">
           <mat-checkbox [(ngModel)]="is_tutor" name="is_tutor">Soy tutor</mat-checkbox>
           <mat-checkbox [(ngModel)]="is_student" name="is_student">Soy estudiante</mat-checkbox>
         </div>
-        <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="!regForm.valid">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="full-width"
+          [disabled]="!regForm.valid || (!is_tutor && !is_student)"
+        >
           Crear cuenta
         </button>
       </form>

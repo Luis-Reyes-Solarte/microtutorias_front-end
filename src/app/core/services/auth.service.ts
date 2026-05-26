@@ -101,7 +101,7 @@ export class AuthService {
     this.isAdmin.set(false);
     this.isTutor.set(false);
     this.isStudent.set(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   getToken(): string | null {

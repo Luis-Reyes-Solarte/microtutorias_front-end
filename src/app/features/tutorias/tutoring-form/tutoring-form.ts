@@ -72,7 +72,7 @@ export class TutoringForm implements OnInit {
       : this.tutoringService.create(payload);
 
     obs.subscribe({
-      next: () => this.router.navigate(['/my-tutorias']),
+      next: () => this.router.navigate(['/app/my-tutorias']),
       error: (err) => {
         if (err.error) {
           const msgs = Object.values(err.error).flat().join('\n');

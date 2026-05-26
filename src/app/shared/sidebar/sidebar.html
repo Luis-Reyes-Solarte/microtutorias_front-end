@@ -20,7 +20,7 @@
   <div class="nav-section">General</div>
   <a
     mat-list-item
-    routerLink="/"
+    routerLink="/app"
     routerLinkActive="active-link"
     [routerLinkActiveOptions]="{ exact: true }"
     (click)="close.emit()"
@@ -28,28 +28,28 @@
     <mat-icon matListItemIcon>dashboard</mat-icon>
     <span matListItemTitle>Dashboard</span>
   </a>
-  <a mat-list-item routerLink="/tutorias" routerLinkActive="active-link" (click)="close.emit()">
+  <a mat-list-item routerLink="/app/tutorias" routerLinkActive="active-link" (click)="close.emit()">
     <mat-icon matListItemIcon>search</mat-icon>
     <span matListItemTitle>Buscar tutorías</span>
   </a>
 
   @if (auth.isAdmin()) {
     <div class="nav-section">Administración</div>
-    <a mat-list-item routerLink="/subjects" routerLinkActive="active-link" (click)="close.emit()">
+    <a mat-list-item routerLink="/app/subjects" routerLinkActive="active-link" (click)="close.emit()">
       <mat-icon matListItemIcon>book</mat-icon>
       <span matListItemTitle>Materias</span>
     </a>
-    <a mat-list-item routerLink="/users" routerLinkActive="active-link" (click)="close.emit()">
+    <a mat-list-item routerLink="/app/users" routerLinkActive="active-link" (click)="close.emit()">
       <mat-icon matListItemIcon>people</mat-icon>
       <span matListItemTitle>Usuarios</span>
     </a>
-    <a mat-list-item routerLink="/tutorias" routerLinkActive="active-link" (click)="close.emit()">
+    <a mat-list-item routerLink="/app/tutorias" routerLinkActive="active-link" (click)="close.emit()">
       <mat-icon matListItemIcon>school</mat-icon>
       <span matListItemTitle>Tutorías</span>
     </a>
     <a
       mat-list-item
-      routerLink="/my-bookings"
+      routerLink="/app/my-bookings"
       routerLinkActive="active-link"
       (click)="close.emit()"
     >
@@ -63,7 +63,7 @@
 
     <a
       mat-list-item
-      routerLink="/my-tutorias"
+      routerLink="/app/my-tutorias"
       routerLinkActive="active-link"
       (click)="close.emit()"
     >
@@ -72,14 +72,14 @@
     </a>
     <a
       mat-list-item
-      routerLink="/tutor-bookings"
+      routerLink="/app/tutor-bookings"
       routerLinkActive="active-link"
       (click)="close.emit()"
     >
       <mat-icon matListItemIcon>event_note</mat-icon>
       <span matListItemTitle>Solicitudes</span>
     </a>
-    <a mat-list-item routerLink="/subjects" routerLinkActive="active-link" (click)="close.emit()">
+    <a mat-list-item routerLink="/app/subjects" routerLinkActive="active-link" (click)="close.emit()">
       <mat-icon matListItemIcon>book</mat-icon>
       <span matListItemTitle>Materias</span>
     </a>
@@ -89,7 +89,7 @@
     <div class="nav-section">Estudiante</div>
     <a
       mat-list-item
-      routerLink="/my-bookings"
+      routerLink="/app/my-bookings"
       routerLinkActive="active-link"
       (click)="close.emit()"
     >
@@ -100,7 +100,7 @@
 </mat-nav-list>
 
 <div class="sidebar-footer">
-  <a mat-list-item routerLink="/profile" (click)="close.emit()">
+  <a mat-list-item routerLink="/app/profile" (click)="close.emit()">
     <mat-icon matListItemIcon>person</mat-icon>
     <span matListItemTitle>Mi perfil</span>
   </a>

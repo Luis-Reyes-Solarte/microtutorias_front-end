@@ -41,7 +41,7 @@ export class ReviewForm {
   booking$: Observable<Booking | null> = this.fetchBooking$.pipe(
     switchMap(() => this.bookingService.get(this.bookingId)),
     catchError(() => {
-      this.router.navigate(['/my-bookings']);
+      this.router.navigate(['/app/my-bookings']);
       return of(null);
     })
   );
@@ -72,7 +72,7 @@ export class ReviewForm {
     }).subscribe({
       next: () => {
         this.success = 'Reseña enviada correctamente';
-        setTimeout(() => this.router.navigate(['/my-bookings']), 1500);
+        setTimeout(() => this.router.navigate(['/app/my-bookings']), 1500);
       },
       error: (err) => {
         this.error = err.error?.message || 'Error al enviar la reseña';

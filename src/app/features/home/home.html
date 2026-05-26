@@ -1,0 +1,296 @@
+<div class="home">
+  <!-- ========== NAVBAR ========== -->
+  <nav class="home-navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" routerLink="/">Micro-<span class="nav-brand-accent">tutorías</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="#features">Características</a>
+        <a class="nav-link" href="#how-it-works">Cómo funciona</a>
+        @if (auth.isLoggedIn()) {
+          <a class="nav-btn" routerLink="/app">
+            <span>Dashboard</span>
+            <span class="nav-btn-arrow">→</span>
+          </a>
+        } @else {
+          <a class="nav-btn nav-btn-primary" routerLink="/register">Registrarse</a>
+          <a class="nav-btn nav-btn-ghost" routerLink="/login">Iniciar sesión</a>
+        }
+      </div>
+      <button class="nav-mobile-toggle" (click)="mobileNavOpen = !mobileNavOpen" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    @if (mobileNavOpen) {
+      <div class="nav-mobile-menu">
+        <a class="nav-mobile-link" href="#features" (click)="mobileNavOpen = false">Características</a>
+        <a class="nav-mobile-link" href="#how-it-works" (click)="mobileNavOpen = false">Cómo funciona</a>
+        @if (auth.isLoggedIn()) {
+          <a class="nav-mobile-link nav-mobile-cta" routerLink="/app" (click)="mobileNavOpen = false">
+            Dashboard →
+          </a>
+        } @else {
+          <a class="nav-mobile-link nav-mobile-cta" routerLink="/register" (click)="mobileNavOpen = false">
+            Registrarse
+          </a>
+          <a class="nav-mobile-link" routerLink="/login" (click)="mobileNavOpen = false">
+            Iniciar sesión
+          </a>
+        }
+      </div>
+    }
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Plataforma de aprendizaje colaborativo</div>
+      <h1 class="hero-title">
+        <span class="hero-title-main">Micro-</span>
+        <span class="hero-title-accent">tutorías</span>
+      </h1>
+      <p class="hero-subtitle">
+        Conectamos estudiantes con tutores expertos para sesiones de aprendizaje
+        personalizadas. Aprende más rápido, con alguien que entiende tus necesidades.
+      </p>
+      <div class="hero-actions">
+        @if (auth.isLoggedIn()) {
+          <a class="btn btn-primary" routerLink="/app">
+            <span class="btn-icon">→</span>
+            Ir al Dashboard
+          </a>
+        } @else {
+          <a class="btn btn-primary" routerLink="/register">
+            <span class="btn-icon">→</span>
+            Comenzar ahora
+          </a>
+          <a class="btn btn-secondary" routerLink="/login">
+            Iniciar sesión
+          </a>
+        }
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Descubre más</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-number">{{ subjectCount || '0' }}+</div>
+          <div class="stat-label">Materias</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Tutores</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Sesiones</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-number">4.8</div>
+          <div class="stat-label">Calificación</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Características</span>
+        <h2>Todo lo que necesitas para aprender</h2>
+        <p>Una plataforma completa diseñada para facilitar el aprendizaje uno a uno.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">🔍</span>
+          </div>
+          <h3>Busca tutorías</h3>
+          <p>Encuentra la tutoría perfecta para ti. Filtra por materia, precio y disponibilidad.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">📅</span>
+          </div>
+          <h3>Reserva sesiones</h3>
+          <p>Agenda tu sesión en pocos clics. Elige el horario que mejor se adapte a ti.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">💬</span>
+          </div>
+          <h3>Valora y comenta</h3>
+          <p>Comparte tu experiencia después de cada sesión. Ayuda a otros estudiantes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">📊</span>
+          </div>
+          <h3>Seguimiento</h3>
+          <p>Da seguimiento a tus reservas activas y tutorías completadas desde un solo lugar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">🛡️</span>
+          </div>
+          <h3>Tutores verificados</h3>
+          <p>Todos nuestros tutores pasan por un proceso de verificación para garantizar calidad.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="feature-icon">💎</span>
+          </div>
+          <h3>Precios justos</h3>
+          <p>Los tutores establecen sus propios precios. Encuentra opciones para todos los presupuestos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Cómo funciona</span>
+        <h2>Tres pasos simples</h2>
+        <p>Empezar a aprender nunca fue tan fácil.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Regístrate</h3>
+            <p>Crea tu cuenta en segundos. Elige si quieres ser tutor, estudiante o ambos.</p>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Busca o publica</h3>
+            <p>Los estudiantes buscan tutorías disponibles. Los tutores publican sus anuncios.</p>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Reserva y aprende</h3>
+            <p>Reserva la sesión que más te guste y comienza a aprender al ritmo que necesitas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOOKINGS PREVIEW ========== -->
+  @if (bookings.length > 0) {
+    <section class="bookings-preview" id="bookings">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Actividad reciente</span>
+          <h2>Reservas recientes</h2>
+          <p>Estas son algunas de las reservas realizadas en la plataforma.</p>
+        </div>
+        <div class="bookings-grid">
+          @for (b of bookings; track b.id) {
+            <div class="booking-card">
+              <div class="booking-header">
+                <span class="booking-status" [class]="statusClass(b.status)">
+                  {{ b.status }}
+                </span>
+                <span class="booking-date">{{ b.created_at | date:'shortDate' }}</span>
+              </div>
+              <div class="booking-body">
+                <div class="booking-tutor">
+                  <span class="booking-label">Tutoría</span>
+                  <span class="booking-value">#{{ b.tutoring }}</span>
+                </div>
+                <div class="booking-student">
+                  <span class="booking-label">Estudiante</span>
+                  <span class="booking-value">{{ b.student_detail?.username || 'Usuario #' + b.student }}</span>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ========== CTA ========== -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-card">
+        <h2>¿Listo para empezar?</h2>
+        <p>Únete a nuestra comunidad de aprendizaje y alcanza tus metas académicas.</p>
+        <div class="cta-actions">
+          @if (auth.isLoggedIn()) {
+            <a class="btn btn-primary btn-lg" routerLink="/app">
+              Ir al Dashboard
+            </a>
+          } @else {
+            <a class="btn btn-primary btn-lg" routerLink="/register">
+              Crear cuenta gratis
+            </a>
+            <a class="btn btn-outline btn-lg" routerLink="/login">
+              Ya tengo cuenta
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Micro-tutorías</h3>
+          <p>Aprendizaje personalizado para todos.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Enlaces</h4>
+          <a routerLink="/">Inicio</a>
+          <a routerLink="/login">Iniciar sesión</a>
+          <a routerLink="/register">Registrarse</a>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Micro-tutorías. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</div>

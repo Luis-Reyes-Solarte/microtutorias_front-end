@@ -10,7 +10,7 @@ export const adminGuard = () => {
     return true;
   }
 
-  return router.parseUrl('/');
+  return router.parseUrl('/app');
 };
 
 export const tutorGuard = () => {
@@ -21,7 +21,7 @@ export const tutorGuard = () => {
     return true;
   }
 
-  return router.parseUrl('/');
+  return router.parseUrl('/app');
 };
 
 export const studentGuard = () => {
@@ -32,5 +32,5 @@ export const studentGuard = () => {
     return true;
   }
 
-  return router.parseUrl('/');
+  return router.parseUrl('/app');
 };

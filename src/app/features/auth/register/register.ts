@@ -41,6 +41,10 @@ export class Register {
 
   register() {
     this.error = '';
+    if (!this.is_tutor && !this.is_student) {
+      this.error = 'Selecciona al menos un rol: tutor o estudiante';
+      return;
+    }
     if (this.password !== this.confirmPassword) {
       this.error = 'Las contraseñas no coinciden';
       return;
@@ -56,7 +60,7 @@ export class Register {
       .subscribe({
         next: () => {
           this.auth.login(this.username, this.password).subscribe({
-            next: () => this.router.navigate(['/']),
+            next: () => this.router.navigate(['/app']),
           });
         },
         error: (err) => {

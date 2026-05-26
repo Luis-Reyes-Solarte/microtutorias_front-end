@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/role.guard';
+import { Home } from './features/home/home';
 import { MainLayout } from './shared/main-layout/main-layout';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
@@ -18,10 +19,11 @@ import { TutorBookings } from './features/bookings/tutor-bookings/tutor-bookings
 import { ReviewForm } from './features/reviews/review-form/review-form';
 
 export const routes: Routes = [
+  { path: '', component: Home },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
   {
-    path: '',
+    path: 'app',
     component: MainLayout,
     canActivate: [authGuard],
     children: [

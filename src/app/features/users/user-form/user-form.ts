@@ -52,11 +52,11 @@ export class UserForm implements OnInit {
       const payload = { ...this.model };
       if (!payload.password) delete payload.password;
       this.userService.update(this.model.id!, payload).subscribe(() => {
-        this.router.navigate(['/users']);
+        this.router.navigate(['/app/users']);
       });
     } else {
       this.userService.create(this.model).subscribe(() => {
-        this.router.navigate(['/users']);
+        this.router.navigate(['/app/users']);
       });
     }
   }

@@ -42,6 +42,6 @@ export class SubjectForm implements OnInit {
       ? this.subjectService.update(this.model.id!, this.model)
       : this.subjectService.create(this.model);
 
-    obs.subscribe(() => this.router.navigate(['/subjects']));
+    obs.subscribe(() => this.router.navigate(['/app/subjects']));
   }
 }
